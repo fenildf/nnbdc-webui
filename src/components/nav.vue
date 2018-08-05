@@ -3,10 +3,7 @@
     <!--菜单-->
     <div v-for='menuItem in menuItems' class="nav-item" :class='{active: menuItem.name == getCurrMenuItem}'
          v-on:click='tabToggle(menuItem)'>
-      <span :class='{dropdownBtn: menuItem.name == "进度"}'>{{menuItem.name}}</span>
-      <ul v-if='false&&menuItem.name == "进度"' class="dropdownWrapper" v-show='dropdownActive&&getCurrMenuItem=="进度"'>
-        <li v-for='item in dropParams'>{{item}}</li>
-      </ul>
+      <span>{{menuItem.name}}</span>
     </div>
 
     <!--工具和按钮-->
@@ -371,8 +368,7 @@
               this.$router.push({path: '/', query: {}})
             })
           }
-        }],
-        dropParams: ['亚洲', '北美洲', '欧洲', '非洲']
+        }]
       }
     },
     mounted () {
