@@ -49,15 +49,10 @@
             <x-button type="primary" @click.native="getPwd()">找回密码</x-button>
           </flexbox-item>
         </flexbox>
-        <flexbox orient="horizontal">
+        <flexbox orient="horizontal" style="margin-top:4px;">
           <flexbox-item>
             <x-button type="primary" @click.native="fastTry()" v-bind:style="{'font-size':'9px'}">快速体验（不需登录）
             </x-button>
-          </flexbox-item>
-          <flexbox-item>
-            <img alt="QQ登录图标"
-                 src="../assets/qq_login.png" border="0" v-bind:style="{'padding':'4px'}"
-                 @click="toQzoneLogin()">
           </flexbox-item>
         </flexbox>
 

@@ -21,6 +21,7 @@ import forumPostInfo from '@/pages/forumPostInfo'
 import createForumPost from '@/pages/createForumPost'
 import paihang from '@/pages/paihang'
 import gameCenter from '@/pages/gameCenter'
+import chat from '@/pages/chat'
 import russia from '@/pages/russia'
 import wordEdit from '@/pages/wordEdit'
 import dictEdit from '@/pages/dictEdit'
@@ -133,6 +134,11 @@ export default new Router({
       path: '/gameCenter',
       name: '游戏中心',
       component: gameCenter
+    },
+    {
+      path: '/chat',
+      name: '聊天',
+      component: chat
     },
     {
       path: '/russia',

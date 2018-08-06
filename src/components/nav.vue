@@ -351,6 +351,11 @@
             this.$router.push({path: '/paihang', query: {}})
           }
         }, {
+          name: '聊天',
+          func: () => {
+            this.$router.push({path: '/chat', query: {}})
+          }
+        }, {
           name: '游戏',
           func: () => {
             this.$router.push({path: '/gameCenter', query: {}})
