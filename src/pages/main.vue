@@ -25,7 +25,7 @@
             <td class='title'>积分:</td>
             <td><span class="number">{{studyProgress.totalScore}} </span></td>
             <td class='title'>排名:</td>
-            <td><span class="number">{{studyProgress.userOrder==-1?'(暂无)':studyProgress.userOrder}} </span></td>
+            <td><span class="number">{{studyProgress.userOrder == -1 ? '(暂无)' : studyProgress.userOrder}} </span></td>
             <td class='title'/>
             <td/>
           </tr>
@@ -34,7 +34,7 @@
             <td class='title'>打卡天数:</td>
             <td><span class="number">{{studyProgress.dakaDayCount}} </span></td>
             <td class='title'>打卡率:</td>
-            <td><span class="number">{{studyProgress.dakaRatio*100 | toFixed(2)}}%
+            <td><span class="number">{{studyProgress.dakaRatio * 100 | toFixed(2)}}%
 							</span></td>
             <td class='title'/>
             <td/>
@@ -70,7 +70,7 @@
         <!-- 生词本 -->
         <tr>
           <td width=350>
-            <div id="rawWordBook"
+            <div id="rawWordBook" @click="gotoRawWordPage()"
                  style="border: solid 1px gray; width: 5em; height: 3em; background-color: lightgreen; cursor: pointer; float: left;">
               <div style="text-align: center;">生词本</div>
               <div style="text-align: center;">
@@ -98,7 +98,8 @@
               {{learningDict.dict.shortName}}
             </div>
 
-            <progress-bar :max="learningDict.dict.wordCount" :progress="learningDict.currentWordOrder" precision="2" height="18px" ></progress-bar>
+            <progress-bar :max="learningDict.dict.wordCount" :progress="learningDict.currentWordOrder" precision="2"
+                          height="18px"></progress-bar>
           </td>
           <td>
             <img v-if="learningDict.isPrivileged == true"
@@ -262,10 +263,11 @@
     Selector,
     XButton
   } from 'vux'
-  import {mapActions, mapGetters} from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import IEcharts from 'vue-echarts-v3'
   import api from './api'
   import util from './util'
+
   export default {
     directives: {
       TransferDom
@@ -345,6 +347,9 @@
       })
     },
     methods: {
+      gotoRawWordPage () {
+        this.$router.push({path: '/rawWord', query: {}})
+      },
       selectDict () {
         this.$router.push({path: '/selectDict', query: {}})
       },
