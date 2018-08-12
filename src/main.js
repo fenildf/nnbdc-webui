@@ -26,7 +26,7 @@ Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(ConfirmPlugin)
 
-Vue.use(VueSocketio, 'http://' + location.host + ':80/russia')
+Vue.use(VueSocketio, 'http://' + location.host + ':80/all')
 
 Vue.component('my-nav', MyNav)
 Vue.component('progress-bar', ProgressBar)

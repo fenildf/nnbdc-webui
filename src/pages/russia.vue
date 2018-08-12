@@ -63,7 +63,7 @@
           </div>
 
           <div v-if="isPlaying" id="answerBtns">
-            <div class="btnDiv" @click="onClickAnswer(1)" @mouseup.stop="">
+            <div class="btnDiv" @click="onClickAnswer(1)" @mouseup.stop="" >
               {{playerA.correctIndex == 1 ? playerA.currWord.meaningStr : playerA.otherWordMeanings[0]}}
             </div>
             <div class="btnDiv" @click="onClickAnswer(2)" @mouseup.stop="">
@@ -350,6 +350,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    user-select:none;
   }
 
   .btnDiv:hover {
@@ -756,6 +757,7 @@
         }
         this.$socket.emit('userCmd', {
           userId: this.getLoggedInUser.id,
+          system: 'russia',
           cmd: cmd,
           args: args
         })

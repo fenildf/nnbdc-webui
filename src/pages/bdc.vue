@@ -678,6 +678,7 @@
     cursor: pointer;
     background-color: #3BA776;
     color: #eee;
+    user-select:none;
   }
 
   #nextBtn:hover {
@@ -734,6 +735,7 @@
     word-wrap: break-word;
     white-space: normal;
     cursor: pointer;
+    user-select:none;
   }
 
   div#answerdiv {
