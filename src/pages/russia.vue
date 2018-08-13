@@ -50,7 +50,7 @@
           <div v-if="!isPlaying&!isShowingResult" id="cmdBtns">
             <div class="btnDiv" @click="startMatch()" v-if="gameState=='ready' && !playerA.started">开始比赛</div>
             <div class="btnDiv" @click="showIdleUsers()" v-if="gameState=='waiting'">邀请对手</div>
-            <div v-if="isInviting" id="idleUsersDiv">
+            <div v-if="isInviting && gameState=='waiting'" id="idleUsersDiv">
               <div class="userToInvite" v-for="(user,i) in idleUsers" @mouseup.stop="">
                 <span>{{user.displayNickName}}</span><span class="btnDiv2" v-if="!user.invited" @click="inviteUser(i)">邀请</span><span
                 v-if="user.invited"> (已发送邀请)</span>

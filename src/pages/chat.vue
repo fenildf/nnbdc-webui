@@ -109,11 +109,20 @@
       adjustInfoAreaSize () {
         this.infoAreaHeight = this.getWinHeight() - 180
       },
-      sendMsg () {
-        this.$socket.emit('msg', {
+      sendUserCmd (cmd, args) {
+        if (!this.getLoggedInUser.id) {
+          this.warn('您尚未登录，请先登录')
+          return
+        }
+        this.$socket.emit('userCmd', {
           userId: this.getLoggedInUser.id,
-          message: this.msgToSend
+          system: 'chat',
+          cmd: cmd,
+          args: args
         })
+      },
+      sendMsg () {
+        this.sendUserCmd('msg', [this.getLoggedInUser.id, this.msgToSend])
         this.msgToSend = ''
         this.$refs.chatContent.focus()
       },
