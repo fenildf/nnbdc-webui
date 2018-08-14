@@ -71,13 +71,15 @@
         },
         () => {
           if (this.isUserReportedToSocketServer) {
-
+            this.tryEnterChatRoom()
           }
         },
         {
           deep: true // add this if u need to watch object properties change etc.
         }
       )
+
+      this.tryEnterChatRoom()
 
       window.addEventListener('resize', this.adjustInfoAreaSize)
       this.adjustInfoAreaSize()
@@ -88,7 +90,11 @@
     destroyed () {
       this.unwatchHandle() // 取消对store的监听
     },
-    sockets: {},
+    sockets: {
+      USER_SPEAK: function (chatObj) {
+        console.log(chatObj)
+      }
+    },
     computed: {
       ...mapGetters([
         'getLoggedInUser',
@@ -109,6 +115,12 @@
       adjustInfoAreaSize () {
         this.infoAreaHeight = this.getWinHeight() - 180
       },
+      /** 申请进入聊天室 */
+      tryEnterChatRoom () {
+        if (this.isUserReportedToSocketServer) {
+          this.sendUserCmd('ENTER_CHAT_ROOM', [])
+        }
+      },
       sendUserCmd (cmd, args) {
         if (!this.getLoggedInUser.id) {
           this.warn('您尚未登录，请先登录')
@@ -122,7 +134,7 @@
         })
       },
       sendMsg () {
-        this.sendUserCmd('msg', [this.getLoggedInUser.id, this.msgToSend])
+        this.sendUserCmd('USER_SPEAK', [this.msgToSend])
         this.msgToSend = ''
         this.$refs.chatContent.focus()
       },
