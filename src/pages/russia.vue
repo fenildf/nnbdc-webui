@@ -138,7 +138,7 @@
       </div>
 
       <div class="msgs" style="flex-grow:1;">
-        <div id="wrapper" ref="msgsDiv" style="overflow-y: auto;flex-grow:1;">
+        <div id="wrapper" ref="msgsWrapper" style="overflow-y: auto;flex-grow:1;">
           <div id="content">
             <div v-for="msg in msgs"
                  :class="{sysMsg:msg.senderId==0, myMsg:msg.senderId==getLoggedInUser.id, hisMsg:msg.senderId!==0&&msg.senderId!=getLoggedInUser.id}">
@@ -781,7 +781,7 @@
       appendMsg (senderId /* 发送者ID，为0表示系统 */, senderNickName, msg) {
         this.msgs.push({senderId: senderId, senderNickName: senderNickName, msg: msg})
         this.$nextTick(() => {
-          this.$refs.msgsDiv.scrollTop = this.$refs.msgsDiv.scrollHeight
+          this.$refs.msgsWrapper.scrollTop = this.$refs.msgsWrapper.scrollHeight
         })
       },
       getWinHeight () {

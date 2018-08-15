@@ -1,10 +1,11 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-  <div v-if="isNavVisible" class="wrapper">
+  <Menu v-if="isNavVisible" mode="horizontal" :theme="theme1" :active-name="getCurrMenuItem"
+        @on-select="route">
     <!--菜单-->
-    <div v-for='menuItem in menuItems' class="nav-item" :class='{active: menuItem.name == getCurrMenuItem}'
-         v-on:click='tabToggle(menuItem)'>
-      <span>{{menuItem.name}}</span>
-    </div>
+    <MenuItem v-for='menuItem in menuItems' :name="menuItem.name" :key="menuItem.name"
+              v-on:click='tabToggle(menuItem)'>
+      {{menuItem.name}}
+    </MenuItem>
 
     <!--工具和按钮-->
     <div class="nav-item">
@@ -12,7 +13,6 @@
         <!--单词搜索-->
         <div class="search">
           <input v-model="searchStr" v-focus="searchFocused" @focus="searchFocused=true" @keyup.stop="onKeyUp($event)"
-                 @change="onSearchChange()"
                  @keydown="onKeyDown($event)" @mouseup.stop=""/>
           <ul class="wordList">
             <li v-for="(matchedWord,i) in matchedWords" :class="currMatchedWordIndex==i?'selected':''"
@@ -82,7 +82,7 @@
     <!--收到消息时的提示音-->
     <audio ref="msgSound" src="../assets/explode.mp3">
     </audio>
-  </div>
+  </Menu>
 </template>
 
 <style scoped>
@@ -307,6 +307,7 @@
     },
     data () {
       return {
+        theme1: 'light',
         email: null,
         nickName: null,
         password: null,
@@ -429,15 +430,16 @@
         'setMsgsAsViewed'
       ]),
       hasMenuItem (itemName) {
-        let itemAdded = false
+        return this.getMenuByName(itemName) != null
+      },
+      getMenuByName (name) {
         for (let i in this.menuItems) {
           let item = this.menuItems[i]
-          if (item.name === itemName) {
-            itemAdded = true
-            break
+          if (item.name === name) {
+            return item
           }
         }
-        return itemAdded
+        return null
       },
       submitUserInfo () {
         api.updateUserInfo(this.email, this.nickName, this.password, this.password2).then((res) => {
@@ -531,7 +533,13 @@
         this.$emit('popWordDetailWindow', spell, null)
         this.clearSearch()
       },
+
+      route (name) {
+        this.setCurrMenuItem(name)
+        this.getMenuByName(name).func()
+      },
       tabToggle: function (menuItem) {
+        alert(menuItem.name)
         this.setCurrMenuItem(menuItem.name)
 
         if (menuItem.name === '进度') {

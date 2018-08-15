@@ -6,18 +6,18 @@
 
       <span id="onlineCount"></span>
 
-      <div id="wrapper" :style="{height:infoAreaHeight+'px'}">
-        <div id="content"></div>
+      <div id="wrapper" ref="msgsWrapper" :style="{height:infoAreaHeight+'px'}">
+        <div id="content">
+          <div v-for="msg in msgs">
+            {{msg.senderNickName}}:{{msg.content}}
+          </div>
+        </div>
       </div>
 
-      <div id="hint" style="margin-top: 8px;">
-
-        <label>Input text here, press <a href="javascript:;"
-                                         id="sendBtn" style="text-decoration: none;">[Enter]</a> to send
-        </label> <label id="warn" style="margin-left: 48px; color: red;"></label>
-      </div>
-
-      <input id="message" type="text" ref="chatContent" v-model="msgToSend" v-on:keyup.enter="sendMsg"/>
+      <Input size="large" style="margin-top: 8px" ref="chatContent" v-model="msgToSend"
+             placeholder="Input text here, press [Enter] to send"
+             @keyup.native.enter="sendMsg()"
+             type="text"/>
     </div>
   </div>
 </template>
@@ -31,11 +31,12 @@
     position: relative;
     width: 100%;
     background-color: lightgreen;
-    border-radius: 10px;
-    border: 1px solid black;
+    border-radius: 2px;
+    border: 1px solid #bbb;
     z-index: 1;
     overflow: hidden;
-    /*height: 5em;*/
+    overflow-y: auto;
+    flex-grow: 1;
   }
 
   #content {
@@ -83,6 +84,9 @@
 
       window.addEventListener('resize', this.adjustInfoAreaSize)
       this.adjustInfoAreaSize()
+      this.$nextTick(() => {
+        this.focusToInputBox()
+      })
     },
     beforeDestroy () {
       window.removeEventListener('resize', this.adjustInfoAreaSize)
@@ -91,8 +95,10 @@
       this.unwatchHandle() // 取消对store的监听
     },
     sockets: {
-      USER_SPEAK: function (chatObj) {
-        console.log(chatObj)
+      USER_SPEAK: function (chatMsg) {
+        console.log(chatMsg)
+        let speaker = chatMsg[0]
+        this.appendMsg(speaker.id, speaker.displayNickName, chatMsg[1])
       }
     },
     computed: {
@@ -113,7 +119,7 @@
         return (window.innerHeight || (window.document.documentElement.clientHeight || window.document.body.clientHeight))
       },
       adjustInfoAreaSize () {
-        this.infoAreaHeight = this.getWinHeight() - 180
+        this.infoAreaHeight = this.getWinHeight() - 140
       },
       /** 申请进入聊天室 */
       tryEnterChatRoom () {
@@ -133,15 +139,18 @@
           args: args
         })
       },
+      focusToInputBox () {
+        this.$refs.chatContent.focus()
+      },
       sendMsg () {
         this.sendUserCmd('USER_SPEAK', [this.msgToSend])
         this.msgToSend = ''
-        this.$refs.chatContent.focus()
+        this.focusToInputBox()
       },
-      appendMsg (senderId /* 发送者ID，为0表示系统 */, senderNickName, msg) {
-        this.msgs.push({senderId: senderId, senderNickName: senderNickName, msg: msg})
+      appendMsg (senderId /* 发送者ID，为0表示系统 */, senderNickName, content) {
+        this.msgs.push({senderId: senderId, senderNickName: senderNickName, content: content})
         this.$nextTick(() => {
-          this.$refs.msgsDiv.scrollTop = this.$refs.msgsDiv.scrollHeight
+          this.$refs.msgsWrapper.scrollTop = this.$refs.msgsWrapper.scrollHeight
         })
       }
     }
