@@ -99,6 +99,7 @@
       FlexboxItem
     },
     mounted () {
+      this.setNavVisible(false)
       this.initUI()
       this.initInput()
       this.$refs.password.focus()
@@ -219,7 +220,8 @@
         this.$router.push({path: '/getPwd', query: {}})
       },
       ...mapActions([
-        'setLoggedInUser'
+        'setLoggedInUser',
+        'setNavVisible'
       ]),
       toQzoneLogin () {
         window.location.assign('/service/nnbdc-service/qqlogin2.do')

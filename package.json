@@ -16,7 +16,7 @@
     "echarts": "^4.1.0",
     "fastclick": "^1.0.6",
     "html-entities": "^1.2.1",
-    "iview": "^2.14.0",
+    "iview": "^3.0.0",
     "sha256": "^0.2.0",
     "vue": "^2.5.16",
     "vue-echarts-v3": "^1.0.19",
