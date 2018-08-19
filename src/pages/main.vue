@@ -208,7 +208,7 @@
 
 <style scoped>
   .echarts {
-    width: 800px;
+    width: 780px;
     height: 400px;
   }
 
