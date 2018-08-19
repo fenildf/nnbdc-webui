@@ -177,7 +177,9 @@
         this.$refs.chatContent.focus()
       },
       sendMsg () {
-        if (this.isInputChinese) {
+        if (this.msgToSend.trim() === '') {
+          this.warn('聊天内容不能为空')
+        } else if (this.isInputChinese) {
           this.warn('这是英文聊天室，不能使用中文')
         } else {
           this.sendUserCmd('USER_SPEAK', [this.msgToSend])

@@ -16,8 +16,6 @@ import ProgressBar from './components/ProgressBar.vue'
 import Pronounce from './components/Pronounce.vue'
 import store from './vuex/modules/bdc'
 import util from './pages/util'
-import iView from 'iview'
-import 'iview/dist/styles/iview.css'    // 使用 CSS
 
 Vue.use(ShortKey, {prevent: ['input', 'textarea']})
 Vue.use(VueRouter)
@@ -27,7 +25,6 @@ Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(ConfirmPlugin)
-Vue.use(iView)
 
 Vue.use(VueSocketio, 'http://' + location.host + ':80/all')
 
