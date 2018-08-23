@@ -33,7 +33,7 @@
 
         <tr v-for="(wrongWord, i) in wrongWords" @click='playSounds([$refs.wordSound[i]])' :class="i%2?'odd':'even'">
           <td style='padding:0'>
-            <audio ref="wordSound" v-if="wrongWord.sound" :src="'/sound/'+wrongWord.sound+'.mp3'">
+            <audio ref="wordSound" v-if="wrongWord.sound" :src="soundBaseUrl + '/'+wrongWord.sound+'.mp3'">
             </audio>
             <input type='text'
                    v-model="mode=='browse'||(focusedWords[i]&&currWordIndex!=i)?wrongWord.spell:spellInputs[i]"
@@ -129,6 +129,7 @@
   import { Tab, TabItem, XButton, Flexbox, FlexboxItem } from 'vux'
   import { focus } from 'vue-focus'
   import api from '../pages/api'
+  import config from '../config'
 
   export default {
     directives: {focus: focus},
@@ -151,7 +152,8 @@
         dakaFinished: false,
         dakaScore: -1,
         cowdung: -1,
-        errMsg: ''
+        errMsg: '',
+        soundBaseUrl: config.soundBaseUrl
       }
     },
     mounted () {

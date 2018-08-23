@@ -9,7 +9,7 @@
 
       <tr v-for="(learningWord, i) in stageWords" @click='playSounds([$refs.wordSound[i]])' :class="i%2?'odd':'even'">
         <td style='padding:0'>
-          <audio ref="wordSound" v-if="learningWord.soundPath" :src="'/sound/'+learningWord.soundPath+'.mp3'">
+          <audio ref="wordSound" v-if="learningWord.soundPath" :src="soundBaseUrl + '/'+learningWord.soundPath+'.mp3'">
           </audio>
           <input type='text'
                  v-model="mode=='browse'||(focusedWords[i]&&currWordIndex!=i)?learningWord.word.spell:spellInputs[i]"
@@ -112,6 +112,7 @@
   import { Tab, TabItem, XButton, Flexbox, FlexboxItem } from 'vux'
   import { focus } from 'vue-focus'
   import api from '../pages/api'
+  import config from '../config'
 
   export default {
     directives: {focus: focus},
@@ -129,7 +130,8 @@
         spellInputs: [], // 拼写练习时为每个单词输入的内容
         focusedWords: [], // 记录每个输入框是否获得过焦点
         currWordIndex: -1,
-        mode: 'browse'
+        mode: 'browse',
+        soundBaseUrl: config.soundBaseUrl
       }
     },
     mounted () {

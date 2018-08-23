@@ -23,7 +23,8 @@
     </div>
 
     <!--单词发音-->
-    <audio ref="wordSound" v-if="searchWordResult.soundPath" :src="'/sound/'+searchWordResult.soundPath+'.mp3'">
+    <audio ref="wordSound" v-if="searchWordResult.soundPath"
+           :src="soundBaseUrl + '/'+searchWordResult.soundPath+'.mp3'">
     </audio>
   </div>
 </template>
@@ -55,6 +56,7 @@
 <script>
   import { Flexbox, FlexboxItem } from 'vux'
   import api from '../pages/api'
+  import config from '../config'
 
   export default {
     components: {
@@ -66,7 +68,8 @@
         visible: false,
         top: '0px',
         left: '0px',
-        searchWordResult: {word: {}}
+        searchWordResult: {word: {}},
+        soundBaseUrl: config.soundBaseUrl
       }
     },
     methods: {

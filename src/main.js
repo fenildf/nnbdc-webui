@@ -16,6 +16,7 @@ import ProgressBar from './components/ProgressBar.vue'
 import Pronounce from './components/Pronounce.vue'
 import store from './vuex/modules/bdc'
 import util from './pages/util'
+import config from './config'
 
 Vue.use(ShortKey, {prevent: ['input', 'textarea']})
 Vue.use(VueRouter)
@@ -26,7 +27,7 @@ Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(ConfirmPlugin)
 
-Vue.use(VueSocketio, 'http://' + location.host + ':80/all')
+Vue.use(VueSocketio, config.socketServerUrl)
 
 Vue.component('my-nav', MyNav)
 Vue.component('progress-bar', ProgressBar)

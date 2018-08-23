@@ -63,7 +63,7 @@
           </div>
 
           <div v-if="isPlaying" id="answerBtns">
-            <div class="btnDiv" @click="onClickAnswer(1)" @mouseup.stop="" >
+            <div class="btnDiv" @click="onClickAnswer(1)" @mouseup.stop="">
               {{playerA.correctIndex == 1 ? playerA.currWord.meaningStr : playerA.otherWordMeanings[0]}}
             </div>
             <div class="btnDiv" @click="onClickAnswer(2)" @mouseup.stop="">
@@ -350,7 +350,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    user-select:none;
+    user-select: none;
   }
 
   .btnDiv:hover {
@@ -409,6 +409,7 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import { XButton, XInput, XTextarea, Group, Flexbox, FlexboxItem } from 'vux'
+  import config from '../config'
 
   export default {
     data () {
@@ -619,7 +620,7 @@
         // 禁止显示当前下落单词的详情
         this.setForbiddenWordForDetail(this.playerA.currWord.spell)
 
-        this.wordSoundFile = '/sound/' + data[2] + '.mp3'
+        this.wordSoundFile = config.soundBaseUrl + '/' + data[2] + '.mp3'
         this.$nextTick(() => {
           this.playSounds([this.$refs.wordSound])
         })

@@ -10,7 +10,7 @@
 
         <tr v-for="(rawWord, i) in rawWords" @click='playSounds([$refs.wordSound[i]])' :class="i%2?'odd':'even'">
           <td style='padding:0'>
-            <audio ref="wordSound" v-if="rawWord.soundUrl" :src="'/sound/'+rawWord.soundUrl+'.mp3'">
+            <audio ref="wordSound" v-if="rawWord.soundUrl" :src="soundBaseUrl + '/'+rawWord.soundUrl+'.mp3'">
             </audio>
             <input type='text'
                    v-model="mode=='browse'||(hasBeenFocused[i]&&currWordIndex!=i)?rawWord.word.spell:spellInputs[i]"
@@ -100,6 +100,7 @@
   import { focus } from 'vue-focus'
   import api from '../pages/api'
   import MoPaging from '../components/paging.vue'
+  import config from '../config'
 
   export default {
     directives: {focus: focus},
@@ -123,7 +124,8 @@
         spellInputs: [], // 拼写练习时为每个单词输入的内容
         hasBeenFocused: [], // 记录每个输入框是否获得过焦点
         currWordIndex: -1,
-        mode: 'browse'
+        mode: 'browse',
+        soundBaseUrl: config.soundBaseUrl
       }
     },
     mounted () {

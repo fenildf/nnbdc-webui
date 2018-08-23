@@ -419,7 +419,7 @@
               <img src='../assets/delete-black.png' style='margin-left:24px' @click='deleteImage(image.id)'
                    v-if="image.author.userName == getLoggedInUser.userName || getLoggedInUser.isAdmin"/>
             </div>
-            <img style='width:120px;height:120px;' :src="'/res/img/word/'+image.imageFile"/>
+            <img style='width:120px;height:120px;' :src="imageBaseUrl + '/'+image.imageFile"/>
           </a>
         </div>
       </div>
@@ -678,7 +678,7 @@
     cursor: pointer;
     background-color: #3BA776;
     color: #eee;
-    user-select:none;
+    user-select: none;
   }
 
   #nextBtn:hover {
@@ -735,7 +735,7 @@
     word-wrap: break-word;
     white-space: normal;
     cursor: pointer;
-    user-select:none;
+    user-select: none;
   }
 
   div#answerdiv {
@@ -914,6 +914,7 @@
   import api from './api'
   import BrowserTooOldForAudio from '../components/BrowserTooOldForAudio.vue'
   import Highlight from '../components/Highlight.vue'
+  import config from '../config'
 
   export default {
     components: {
@@ -986,6 +987,7 @@
         additionalInfo: null,
         errorReport: null,
         isEditingChineseForShortDesc: false,
+        imageBaseUrl: config.imageBaseUrl,
         inputedChineseOfWordShortDesc: '', // 用户输入的英文短描述中文释义
         inputedSpell: '' // 拼写练习输入框里输入的内容
       }
@@ -1032,7 +1034,7 @@
       },
       wordSoundFile () {
         if (this.currWord.soundPath) {
-          return '/sound/' + this.currWord.soundPath + '.mp3'
+          return config.soundBaseUrl + '/' + this.currWord.soundPath + '.mp3'
         } else {
           return null
         }
@@ -1121,7 +1123,7 @@
         })
       },
       sentenceSoundFile (sentence) {
-        return sentence.soundFileExists ? ('/sound/sentence/' + sentence.englishDigest + '.mp3') : null
+        return sentence.soundFileExists ? (config.soundBaseUrl + '/sentence/' + sentence.englishDigest + '.mp3') : null
       },
       deleteImage (imageId) {
         api.deleteImage(imageId).then((res) => {
