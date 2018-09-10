@@ -50,8 +50,11 @@
                                                     @shortkey="playSounds([$refs.sentenceSound])"/>(R)</span>
         </span>&nbsp;
         <div v-show="currWord.learningMode==2" style="margin-top:8px">拼写练习(X)&nbsp;&nbsp;
-          <input type="text" v-model="inputedSpell" v-shortkey.focus="['x']" style="font-size:20px;font-weight:bold;"/>
-          <img src='../assets/eye-black.png'/>
+          <input type="text" v-model="inputedSpell" v-shortkey.focus="['x']"
+                 :class="inputedSpell.toLowerCase() == currWord.learningWord.word.spell.toLowerCase()?'spellCorrect':'spellWrong'"
+                 @keyup="checkSpell($event, currWord.learningWord.word.spell)"
+                 style="font-size:20px;font-weight:bold;"/>
+          <img src='../assets/eye-black.png' @click="showCorrectSpell()"/>
         </div>
       </div>
 
@@ -1063,6 +1066,15 @@
       this.continueAtTheLastBreakPoint()
     },
     methods: {
+      showCorrectSpell () {
+        this.inputedSpell = this.currWord.learningWord.word.spell
+        this.playSounds([this.$refs.wordSound])
+      },
+      checkSpell (event, expectedSpell) {
+        if (this.inputedSpell.toLowerCase() === expectedSpell.toLowerCase()) { // 拼写正确了
+          this.playSounds([this.$refs.wordSound])
+        }
+      },
       getSentenceByIndex (sentenceIndex) {
         return this.currWord.sentences[sentenceIndex]
       },
