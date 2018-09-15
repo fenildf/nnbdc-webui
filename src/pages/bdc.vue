@@ -1290,6 +1290,7 @@
       loadAWord () {
         this.isEditingChineseForShortDesc = false
         this.showWordImages = false
+        this.inputedSpell = ''
         let shouldEnterNextStage = false
         if (this.fromPage === 'stageReview') {
           shouldEnterNextStage = true

@@ -174,11 +174,9 @@ new Vue({
     tryReportUserToSocketServer () {
       let userId = this.getLoggedInUser.id
       if (userId && this.isConnectedToSocketServer && !this.isUserReportedToSocketServer) {
-        console.log('this.setIsUserReportedToSocketServer(true)')
         this.setIsUserReportedToSocketServer(true)
         this.$socket.emit('reportUser', userId)
       } else if ((!userId || !this.isConnectedToSocketServer) && this.isUserReportedToSocketServer) {
-        console.log('this.setIsUserReportedToSocketServer(false)')
         this.setIsUserReportedToSocketServer(false)
       }
     }

@@ -67,7 +67,8 @@
               {{playerA.correctIndex == 1 ? playerA.currWord.meaningStr : playerA.otherWordMeanings[0]}}
             </div>
             <div class="btnDiv" @click="onClickAnswer(2)" @mouseup.stop="">
-              {{playerA.correctIndex == 2 ? playerA.currWord.meaningStr : (playerA.correctIndex == 1 ? playerA.otherWordMeanings[0] : playerA.otherWordMeanings[1])}}
+              {{playerA.correctIndex == 2 ? playerA.currWord.meaningStr : (playerA.correctIndex == 1 ?
+              playerA.otherWordMeanings[0] : playerA.otherWordMeanings[1])}}
             </div>
             <div class="btnDiv" @click="onClickAnswer(3)" @mouseup.stop="">
               {{playerA.correctIndex == 3 ? playerA.currWord.meaningStr : playerA.otherWordMeanings[1]}}
@@ -117,7 +118,8 @@
             <div id="myContest"><span class="userInfoTitle">胜负：</span>{{playerA.winCount}}胜{{playerA.lostCount}}负</div>
             <div id="myWinRatio">
               <span
-                class="userInfoTitle">胜率：</span>{{(playerA.winCount * 100.0 / (playerA.winCount + playerA.lostCount)) | toFixed(2)}}%
+                class="userInfoTitle">胜率：</span>{{(playerA.winCount * 100.0 / (playerA.winCount + playerA.lostCount)) |
+              toFixed(2)}}%
             </div>
             <div v-if="playerA.started">已开始...</div>
           </div>
@@ -130,7 +132,8 @@
             <div id="myContest"><span class="userInfoTitle">胜负：</span>{{playerB.winCount}}胜{{playerB.lostCount}}负</div>
             <div id="myWinRatio">
               <span
-                class="userInfoTitle">胜率：</span>{{(playerB.winCount * 100.0 / (playerB.winCount + playerB.lostCount)) | toFixed(2)}}%
+                class="userInfoTitle">胜率：</span>{{(playerB.winCount * 100.0 / (playerB.winCount + playerB.lostCount)) |
+              toFixed(2)}}%
             </div>
             <div v-if="playerB.started">已开始...</div>
           </div>
