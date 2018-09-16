@@ -120,13 +120,20 @@
           this.halls = res.data.halls
           this.topUserGames = res.data.topUserGames
 
+          // 把Hall以名字为key组织为Hash map
+          let hallsByName = []
+          for (let i in this.halls) {
+            let hall = this.halls[i]
+            hallsByName[hall.name] = hall
+          }
+
           // 计算大厅分组及每个大厅中的在线人数
           for (let i in this.hallGroups) {
             let hallGroup = this.hallGroups[i]
             hallGroup.userCount = 0
             for (let j in hallGroup.gameHalls) {
               let gameHall = hallGroup.gameHalls[j]
-              let hall = this.halls[gameHall.hallName]
+              let hall = hallsByName[gameHall.hallName]
               gameHall.userCount = hall ? hall.userCount : 0
               hallGroup.userCount += gameHall.userCount
             }
