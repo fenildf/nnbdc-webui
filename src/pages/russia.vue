@@ -58,7 +58,6 @@
             </div>
             <div class="btnDiv" @click="changeRoom()">换房间</div>
             <div class="btnDiv" @click="exercise()">单人练习</div>
-            <div class="btnDiv" @click="stopExcercise()" v-if="isExercise">停止练习</div>
             <div class="btnDiv" @click="exitGame()">退出游戏</div>
           </div>
 
