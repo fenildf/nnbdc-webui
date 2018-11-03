@@ -572,13 +572,13 @@
           }
         }
       },
-      userInfo: function (userInfo) {
-        let player = userInfo.userId === this.getLoggedInUser.id ? this.playerA : this.playerB
-        player.nickName = userInfo.nickName
-        player.score = userInfo.score
-        player.cowDung = userInfo.cowDung
-        player.winCount = userInfo.winCount
-        player.lostCount = userInfo.lostCount
+      userGameInfo: function (userGameInfo) {
+        let player = userGameInfo.userId === this.getLoggedInUser.id ? this.playerA : this.playerB
+        player.nickName = userGameInfo.nickName
+        player.score = userGameInfo.score
+        player.cowDung = userGameInfo.cowDung
+        player.winCount = userGameInfo.winCount
+        player.lostCount = userGameInfo.lostCount
       },
       roomId: function (value) {
         this.roomId = value
