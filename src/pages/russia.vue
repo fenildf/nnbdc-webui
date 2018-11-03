@@ -409,8 +409,8 @@
 
 </style>
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import { XButton, XInput, XTextarea, Group, Flexbox, FlexboxItem } from 'vux'
+  import {mapActions, mapGetters} from 'vuex'
+  import {XButton, XInput, XTextarea, Group, Flexbox, FlexboxItem} from 'vux'
   import config from '../config'
 
   export default {
@@ -645,7 +645,9 @@
       loser: function (user) {
         this.isPlaying = false
         this.isShowingResult = true
-        setTimeout(() => { this.isShowingResult = false }, 4000)
+        setTimeout(() => {
+          this.isShowingResult = false
+        }, 4000)
 
         if (user === this.getLoggedInUser.id) {
           if (this.isExercise) {
@@ -679,11 +681,21 @@
         this.gameState = 'ready'
       },
       scoreAdjust (data) {
+        let scoreAdjust = data[0]
+        let cowdungAdjust = data[1]
+
         let msg
-        if (data > 0) {
-          msg = '您的积分 +' + data
+        if (scoreAdjust > 0) {
+          msg = '您的积分 +' + scoreAdjust
         } else {
-          msg = '您的积分 -' + data * (-1)
+          msg = '您的积分 -' + scoreAdjust * (-1)
+        }
+        this.appendMsg(0, '牛牛', msg)
+
+        if (cowdungAdjust > 0) {
+          msg = '您的牛粪 +' + cowdungAdjust
+        } else {
+          msg = '您的牛粪 -' + cowdungAdjust * (-1)
         }
         this.appendMsg(0, '牛牛', msg)
       }
