@@ -470,7 +470,7 @@
       },
       acceptInvite (hallName) {
         this.hideMsgs()
-        this.$router.push({path: '/russia', query: {hallName: hallName, random: Math.random()}})
+        this.$router.push({path: '/russia', query: {hallName: hallName, random: Math.random()}}) // random参数是为了达到强制刷新页面的效果，否则如果用户已经在目标大厅了，则不会重新加载当前页面（因为URL相同）
       },
       /** 隐藏单词搜索的备选单词列表 */
       hideCandidateWordsWindow () {
