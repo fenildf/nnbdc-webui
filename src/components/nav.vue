@@ -470,7 +470,7 @@
       },
       acceptInvite (hallName) {
         this.hideMsgs()
-        this.$router.push({path: '/russia', query: {hallName: hallName}})
+        this.$router.push({path: '/russia', query: {hallName: hallName, random: Math.random()}})
       },
       /** 隐藏单词搜索的备选单词列表 */
       hideCandidateWordsWindow () {
